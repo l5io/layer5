@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby '2.6.3'
+ruby '2.6.5'
 
 gem 'materialize-sass'
 gem "jekyll", "~> 3.8.5"
@@ -12,7 +12,7 @@ gem "rack-jekyll"
 gem "pry"
 gem "puma"
 gem 'jekyll-sitemap'
-
+gem 'jekyll-redirect-from'
 
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.6"
