@@ -1,0 +1,41 @@
+name: Build and Deploy Site
+on:
+  push:
+    branches: [master]
+    paths-ignore:
+      - .github/*
+      
+  workflow_dispatch:
+  workflow_call:
+    
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@master
+        with:
+          fetch-depth: 1
+
+      # - name: Cache Gatsby .cache and public folders
+      #   uses: actions/cache@v5
+      #   id: gatsby-cache
+      #   with:
+      #     path: |
+      #       public
+      #       .cache
+      #     key: ${{ runner.os }}-gatsby-${{ hashFiles('**/package-lock.json') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-gatsby-
+
+      - name: Install and Build 🔧
+        run: |
+          make setup
+          make build
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: site # The branch the action should deploy to.
+          folder: public # The folder the action should deploy.
+          clean: true
